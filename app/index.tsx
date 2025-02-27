@@ -8,28 +8,35 @@ import { useCalculator } from '@/Hooks/useCalculator'
 
 const CalculatorApp = () => {
 
-  const { number, formula, prevNumber, buildNumber, clearCalc } = useCalculator()
+  const { number, formula, prevNumber, buildNumber, clearCalc, toggleSimbol, deleteLastNumber, divideOperations,
+    multiplyOperations,
+    addOperations,
+    substractperations } = useCalculator()
 
   return (
     <View style={globalStyles.calculatorContainer}>
 
       <View style={{ paddingHorizontal: 20, paddingBottom: 20 }}>
         <ThemeText variant='primary'>{formula}</ThemeText>
-        <ThemeText variant='secondary'>{number}</ThemeText>
+        {formula === prevNumber ?
+          <ThemeText variant='secondary'> </ThemeText> :
+          <ThemeText variant='secondary'>{prevNumber}</ThemeText>
+        }
+
       </View>
 
       <View style={globalStyles.row}>
-        <CalculatorBtn label='C' onpress={() => { clearCalc() }}
+        <CalculatorBtn label='C' onpress={clearCalc}
           blackText
           color={Colors.lightGray} />
         <CalculatorBtn label='+/-'
-          onpress={() => { }}
+          onpress={toggleSimbol}
           blackText color={Colors.lightGray} />
         <CalculatorBtn label='del'
-          onpress={() => { }}
+          onpress={deleteLastNumber}
           blackText color={Colors.lightGray} />
         <CalculatorBtn label='/'
-          onpress={() => { }}
+          onpress={divideOperations}
           color={Colors.orange} />
       </View>
 
@@ -37,20 +44,20 @@ const CalculatorApp = () => {
         <CalculatorBtn label='7' onpress={() => { buildNumber('7') }} />
         <CalculatorBtn label='8' onpress={() => { buildNumber('8') }} />
         <CalculatorBtn label='9' onpress={() => { buildNumber('9') }} />
-        <CalculatorBtn label='x' onpress={() => { }} color={Colors.orange} />
+        <CalculatorBtn label='x' onpress={multiplyOperations} color={Colors.orange} />
       </View>
 
       <View style={globalStyles.row}>
         <CalculatorBtn label='4' onpress={() => { buildNumber('4') }} />
         <CalculatorBtn label='5' onpress={() => { buildNumber('5') }} />
         <CalculatorBtn label='6' onpress={() => { buildNumber('6') }} />
-        <CalculatorBtn label='-' onpress={() => { }} color={Colors.orange} />
+        <CalculatorBtn label='-' onpress={substractperations} color={Colors.orange} />
       </View>
       <View style={globalStyles.row}>
         <CalculatorBtn label='1' onpress={() => { buildNumber('1') }} />
         <CalculatorBtn label='2' onpress={() => { buildNumber('2') }} />
         <CalculatorBtn label='3' onpress={() => { buildNumber('3') }} />
-        <CalculatorBtn label='+' onpress={() => { }} color={Colors.orange} />
+        <CalculatorBtn label='+' onpress={addOperations} color={Colors.orange} />
       </View>
 
       <View style={globalStyles.row}>

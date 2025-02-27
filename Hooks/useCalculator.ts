@@ -46,7 +46,47 @@ export const useCalculator = () => {
         }
         setNumber(number + numText)
     }
+    const toggleSimbol = () => {
+        if (number.includes('-')) {
+            return setNumber(number.replace('-', ''))
+        }
+        setNumber('-' + number)
+    }
 
+    const deleteLastNumber = () => {
+        if (number.length === 1) {
+            setNumber('0')
+        } else {
+            setNumber(number.slice(0, -1))
+        }
+    }
+
+    const setLastNumber = () => {
+        if (number.endsWith('.')) {
+            setPrevNumber(number.slice(0, -1))
+        }
+        setPrevNumber(number)
+        setNumber('0')
+    }
+
+    const divideOperations = () => {
+        setLastNumber()
+        lastOperator.current = Operator.DIVIDE
+    }
+    const multiplyOperations = () => {
+        setLastNumber()
+        lastOperator.current = Operator.MULTIPLY
+    }
+
+    const addOperations = () => {
+        setLastNumber()
+        lastOperator.current = Operator.ADD
+    }
+
+    const substractperations = () => {
+        setLastNumber()
+        lastOperator.current = Operator.SUBTRACT
+    }
     return {
         // Properties
         number,
@@ -54,7 +94,12 @@ export const useCalculator = () => {
         formula,
         // Methods
         buildNumber,
-        clearCalc
-        
+        clearCalc,
+        toggleSimbol,
+        deleteLastNumber,
+        divideOperations,
+        multiplyOperations,
+        addOperations,
+        substractperations
     }
 }
